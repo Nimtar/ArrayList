@@ -1,5 +1,5 @@
 package com.netcracker.infotech;
 
 public interface UncComparator {
-    int compare (int left, int right);
+    int compare(int left, int right);
 }

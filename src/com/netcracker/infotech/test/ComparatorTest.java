@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 public class ComparatorTest {
     @Test
-    public void lesserShouldBeLess () {
+    public void lesserShouldBeLess() {
         UncComparator comparator = new AscendingComparator();
 
         assertTrue(comparator.compare(2, 5) < 0);
@@ -18,7 +18,7 @@ public class ComparatorTest {
     }
 
     @Test
-    public void biggerShouldBeLess () {
+    public void biggerShouldBeLess() {
         UncComparator comparator = new DescendingComporator();
 
         assertTrue(comparator.compare(2, 5) > 0);
