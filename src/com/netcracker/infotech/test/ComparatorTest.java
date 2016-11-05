@@ -13,6 +13,8 @@ public class ComparatorTest {
         assertTrue(comparator.compare(2, 5) < 0);
         assertTrue(comparator.compare(5, 5) == 0);
         assertTrue(comparator.compare(5, 2) > 0);
+
+        System.out.println("Ascending comparator test passed.");
     }
 
     @Test
@@ -22,5 +24,7 @@ public class ComparatorTest {
         assertTrue(comparator.compare(2, 5) > 0);
         assertTrue(comparator.compare(5, 5) == 0);
         assertTrue(comparator.compare(5, 2) < 0);
+
+        System.out.println("Descending comparator test passed");
     }
 }

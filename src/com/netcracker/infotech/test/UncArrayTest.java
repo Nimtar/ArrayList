@@ -28,6 +28,8 @@ public class UncArrayTest {
         index = tester.getLength();
         assertEquals("At position " + index + " should be number " + value,
             value, tester.insert(index, value).get(index));
+
+        System.out.println("Test Insertion. Passed.");
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
@@ -49,10 +51,11 @@ public class UncArrayTest {
         int value = 42;
         assertEquals("At last position should be " + value, value, tester.add(
             value).get(tester.getLength() - 1));
+        System.out.println("Test Adding. Passed");
     }
 
     @Test
-    public void arrayShouldBeShorterAfterDeleting () {
+    public void arrayShouldBeShorterAfterRemovingElement () {
         int expectedLength = tester.getLength() - 1;
         int actualLength = tester.remove(0).getLength();
         assertEquals(expectedLength, actualLength);
@@ -61,6 +64,8 @@ public class UncArrayTest {
             tester.getLength() - 1,
             tester.remove(tester.getLength() - 1).getLength()
         );
+
+        System.out.println("Test Removing. Passed");
     }
 
     @Test
@@ -69,7 +74,10 @@ public class UncArrayTest {
         assertTrue(isSorted(tester.sort(uncComparator), uncComparator));
 
         uncComparator = new AscendingComparator();
-        assertTrue(isSorted(tester.sort(uncComparator), uncComparator));
+        assertTrue("Array should be sorted",
+            isSorted(tester.sort(uncComparator), uncComparator));
+
+        System.out.println("Test Sorting. Passed");
     }
 
     private boolean isSorted (UncArray uncArray, UncComparator comparator) {
