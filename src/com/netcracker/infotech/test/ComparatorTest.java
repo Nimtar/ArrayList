@@ -1,5 +1,5 @@
 import com.netcracker.infotech.AscendingComparator;
-import com.netcracker.infotech.DescendingComporator;
+import com.netcracker.infotech.DescendingComparator;
 import com.netcracker.infotech.UncComparator;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class ComparatorTest {
 
     @Test
     public void biggerShouldBeLess() {
-        UncComparator comparator = new DescendingComporator();
+        UncComparator comparator = new DescendingComparator();
 
         assertTrue(comparator.compare(2, 5) > 0);
         assertTrue(comparator.compare(5, 5) == 0);

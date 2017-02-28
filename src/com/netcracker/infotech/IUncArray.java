@@ -1,15 +1,15 @@
 package com.netcracker.infotech;
 
-public interface IUncArray {
-    IUncArray insert(int index, int value);
+public interface IUncArray<T> {
+    IUncArray insert(int index, T value);
 
-    IUncArray add(int value);
+    IUncArray add(T value);
 
-    IUncArray sort(UncComparator comparator);
+    IUncArray sort(UncComparator<T> comparator);
 
     IUncArray remove(int index);
 
-    int get(int index);
+    T get(int index);
 
-    IUncArray set(int index, int value);
+    IUncArray set(int index, T value);
 }
