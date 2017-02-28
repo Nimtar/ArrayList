@@ -2,8 +2,8 @@ package com.netcracker.infotech;
 
 import java.util.Random;
 
-public class UncArray implements IUncArray {
-    private int[] a;
+public class UncArray<T> implements IUncArray<T> {
+    private T a[];
     private int capacity;
     private int length;
 
@@ -13,15 +13,15 @@ public class UncArray implements IUncArray {
 
     public UncArray(int capacity) {
         this.capacity = capacity < 2 ? 10 : capacity;
-        a = new int[this.capacity];
         this.length = 0;
+        this.a = (T[]) new Object[this.capacity];
     }
 
     public int getLength() {
         return length;
     }
 
-    private void qsort(int l, int r, UncComparator comparator) {
+    private void qsort(int l, int r, UncComparator<T> comparator) {
         if (l >= r) {
             return;
         }
@@ -30,9 +30,9 @@ public class UncArray implements IUncArray {
         qsort(p + 1, r, comparator);
     }
 
-    private int partition(int l, int r, UncComparator comparator) {
+    private int partition(int l, int r, UncComparator<T> comparator) {
         int rand = new Random().nextInt(r - l + 1) + l;
-        int x = a[rand];
+        T x = a[rand];
         int i = l - 1;
         int j = r + 1;
         while (true) {
@@ -41,7 +41,7 @@ public class UncArray implements IUncArray {
             while (comparator.compare(a[++i], x) < 0) {
             }
             if (i < j) {
-                int t = a[i];
+                T t = a[i];
                 a[i] = a[j];
                 a[j] = t;
             } else {
@@ -51,7 +51,7 @@ public class UncArray implements IUncArray {
     }
 
     @Override
-    public UncArray insert(int index, int value) {
+    public UncArray insert(int index, T value) {
         if (index < 0 || length < index) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -70,7 +70,7 @@ public class UncArray implements IUncArray {
 
     private void reallocate() {
         int newCapacity = capacity * 3 / 2;
-        int[] t = new int[newCapacity];
+        T[] t = (T[]) new Object[newCapacity];
         for (int i = 0; i < capacity; i++) {
             t[i] = a[i];
         }
@@ -79,19 +79,19 @@ public class UncArray implements IUncArray {
     }
 
     @Override
-    public UncArray add(int value) {
+    public UncArray<T> add(T value) {
         insert(length, value);
         return this;
     }
 
     @Override
-    public UncArray sort(UncComparator comparator) {
+    public UncArray<T> sort(UncComparator<T> comparator) {
         qsort(0, length - 1, comparator);
         return this;
     }
 
     @Override
-    public UncArray remove(int index) {
+    public UncArray<T> remove(int index) {
         for (int i = index; i < length - 1; i++) {
             a[i] = a[i + 1];
         }
@@ -101,7 +101,7 @@ public class UncArray implements IUncArray {
     }
 
     @Override
-    public int get(int index) {
+    public T get(int index) {
         if (index < 0 || length <= index) {
             throw new ArrayIndexOutOfBoundsException(index);
         }
@@ -109,7 +109,7 @@ public class UncArray implements IUncArray {
     }
 
     @Override
-    public UncArray set(int index, int value) {
+    public UncArray<T> set(int index, T value) {
         if (index < 0 || length <= index) {
             throw new ArrayIndexOutOfBoundsException(index);
         }
