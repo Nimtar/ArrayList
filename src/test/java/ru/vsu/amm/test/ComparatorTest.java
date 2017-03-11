@@ -1,16 +1,16 @@
-package com.netcracker.infotech.test;
+package ru.vsu.amm.test;
 
-import com.netcracker.infotech.AscendingComparator;
-import com.netcracker.infotech.DescendingComparator;
-import com.netcracker.infotech.UncComparator;
 import org.junit.Test;
+import ru.vsu.amm.AscendingComparator;
+import ru.vsu.amm.DescendingComparator;
+import ru.vsu.amm.Comparator;
 
 import static org.junit.Assert.assertTrue;
 
 public class ComparatorTest {
     @Test
-    public void lesserShouldBeLess() {
-        UncComparator comparator = new AscendingComparator();
+    public void lesserShouldBeLess () {
+        Comparator<Integer> comparator = new AscendingComparator();
 
         assertTrue(comparator.compare(2, 5) < 0);
         assertTrue(comparator.compare(5, 5) == 0);
@@ -20,8 +20,8 @@ public class ComparatorTest {
     }
 
     @Test
-    public void biggerShouldBeLess() {
-        UncComparator comparator = new DescendingComparator();
+    public void biggerShouldBeLess () {
+        Comparator<Integer> comparator = new DescendingComparator();
 
         assertTrue(comparator.compare(2, 5) > 0);
         assertTrue(comparator.compare(5, 5) == 0);
