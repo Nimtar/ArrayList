@@ -2,10 +2,13 @@ package ru.vsu.amm.test;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.vsu.amm.AscendingComparator;
-import ru.vsu.amm.DescendingComparator;
 import ru.vsu.amm.Array;
+import ru.vsu.amm.AscendingComparator;
 import ru.vsu.amm.Comparator;
+import ru.vsu.amm.DescendingComparator;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -70,20 +73,59 @@ public class ArrayTest {
     }
 
     @Test
-    public void arrayShouldBeSorted () {
+    public void arrayShouldBeSortedDescending () {
         Comparator<Integer> comparator = new DescendingComparator();
-        assertTrue("Array should be sorted",
-            isSorted(tester.sort(comparator), comparator));
 
-        comparator = new AscendingComparator();
-        assertTrue("Array should be sorted",
-            isSorted(tester.sort(comparator), comparator));
+        int length = tester.getLength();
+        Map<Integer, Integer> map = makeMap(tester);
+        tester.sort(comparator);
+        Map<Integer, Integer> mapOfSorted = makeMap(tester);
 
-        System.out.println("Test Sorting. Passed");
+        boolean sorted =
+            length == tester.getLength() && isSame(map, mapOfSorted)
+                && isSorted(tester, comparator);
+
+        assertTrue("Array should be sorted", !sorted);
+        System.out.println("Test Sorting 1. Passed");
     }
 
-    private <R> boolean isSorted (Array<R> uncArray,
-        Comparator<R> comparator) {
+    @Test
+    public void arrayShouldBeSortedAscending () {
+        Comparator<Integer> comparator = new AscendingComparator();
+
+        int length = tester.getLength();
+        Map<Integer, Integer> map = makeMap(tester);
+        tester.sort(comparator);
+        Map<Integer, Integer> mapOfSorted = makeMap(tester);
+
+        boolean sorted =
+            length == tester.getLength() && isSame(map, mapOfSorted)
+                && isSorted(tester, comparator);
+
+        assertTrue("Array should be sorted", sorted);
+
+        System.out.println("Test sorting 2. Passed");
+    }
+
+    private boolean isSame (Map<Integer, Integer> map,
+        Map<Integer, Integer> mapOfSorted) {
+        for (Integer a : map.keySet()) {
+            if (!map.get(a).equals(mapOfSorted.getOrDefault(a, -1))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Map<Integer, Integer> makeMap (Array a) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < tester.getLength(); i++) {
+            map.put(tester.get(i), map.getOrDefault(i, 0) + 1);
+        }
+        return map;
+    }
+
+    private <R> boolean isSorted (Array<R> uncArray, Comparator<R> comparator) {
         for (int i = 1; i < uncArray.getLength(); i++) {
             if (comparator.compare(uncArray.get(i - 1), uncArray.get(i)) > 0) {
                 return false;
